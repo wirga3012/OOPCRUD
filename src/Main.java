@@ -30,16 +30,11 @@ public class Main {
        Plant.plants.add(plant4);
        Plant.plants.add(plant2);
 
-//        for (int i = 0; i < plants.size(); i++) {
-//            System.out.println(plants.get(i));
-//        }
 
         while (true) {
             Plant.info();
 
             int input = sc.nextInt();
-
-            sc.nextLine();
             switch (input) {
                 case 1:
                     Plant.printPlants();
@@ -48,19 +43,22 @@ public class Main {
                     Plant.addPlant();
                     break;
                 case 3:
-                    System.out.println("Redaguoti augalą");
+                    Plant.editPlant();
                     break;
                 case 4:
-                    System.out.println("Ištrinti augalą");
+                    Plant.deletePlant();
                     break;
                 case 5:
                     System.out.println("Išeiti iš programos");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Atsiprašome tokio varianto nera");
             }
 
         }
+
+
     }
 
 

@@ -17,7 +17,9 @@ public class Plant {
     public Plant() {
         this.id = ++idCount;
     }
-
+    public Plant(int id) {
+        this.id = id;
+    }
     public Plant(String species, String speciesInLatin, boolean isAnnual, String continent, int height, boolean isEdible) {
         this.id = ++idCount;
         this.species = species;
@@ -91,7 +93,7 @@ public class Plant {
                 + "Is " + annual + ",\n"
                 + "Continent- " + continent + ",\n"
                 + "Height (cm)- " + height + ",\n"
-                + "Is" + edibleOrNot + "\n");
+                + "Is " + edibleOrNot + "\n");
     }
 
     public static void info() {
@@ -109,34 +111,58 @@ public class Plant {
     }
 
     public static void addPlant() {
-        Plant plant = new Plant();
-
-        System.out.println("1. Įveskite augalo pavadinimą: ");
-        plant.setSpecies(sc.nextLine());
-
-        System.out.println("2. Įveskite augalo pavadinimą Lotyniškai: ");
-        plant.setSpeciesInLatin(sc.nextLine());
-
-        System.out.println("3. Kokiame žemyne auga?: ");
-        plant.setContinent(sc.nextLine());
-
-        System.out.println("4. Ar augalas vienmetis?(true/false): ");
-        plant.setAnnual(sc.nextBoolean());
-
-        System.out.println("5. Ar augalas valgomas?(true/false): ");
-        plant.setIsEdible(sc.nextBoolean());
-
-        plants.add(plant);
+       Plant.plants.add(createPlant(0));
     }
 
-//    public static void updatePlant(int id) {
-////        for(Account account : accountsList) {
-////            if(account.getId().equals(someId) {
-////                //found it!
-////            }
-////        }
-//
-//    }
+    public static void editPlant(){
+        System.out.println("Pasirinkite augalo id kurį norite redaguoti: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        for (int i = 0; i < plants.size(); i++) {
+            if(plants.get(i).id == id){
+                plants.set(i,createPlant(id));
+                return;
+            }
+        }
 
+    }
+    public static Plant createPlant (int id){
+        Plant p;
+        if (id == 0){
+            p = new Plant();
+        }else{
+            p = new Plant(id);
+        }
+        System.out.println("1. Įveskite augalo pavadinimą: ");
+        p.setSpecies(sc.nextLine());
 
+        System.out.println("2. Įveskite augalo pavadinimą Lotyniškai: ");
+        p.setSpeciesInLatin(sc.nextLine());
+
+        System.out.println("3. Kokiame žemyne auga?: ");
+        p.setContinent(sc.nextLine());
+
+        System.out.println("4. Nurodykite augalo aukštį (cm)?: ");
+        p.setContinent(sc.nextLine());
+
+        System.out.println("5. Ar augalas vienmetis?(true/false): ");
+        p.setAnnual(sc.nextBoolean());
+
+        System.out.println("6. Ar augalas valgomas?(true/false): ");
+        p.setIsEdible(sc.nextBoolean());
+        sc.nextLine();
+        return p;
+    }
+    public static void deletePlant(){
+        System.out.println("Pasirinkite augalo id kurį norite ištrinti:");
+        int id = sc.nextInt();
+        sc.nextLine();
+        for (int i = 0; i < plants.size(); i++) {
+            if(plants.get(i).id == id){
+               plants.remove(i);
+               return;
+            }
+        }
+
+    }
 }
