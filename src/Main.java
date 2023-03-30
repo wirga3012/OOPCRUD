@@ -32,7 +32,7 @@ public class Main {
         while (true) {
             Plant.info();
 
-            int input = sc.nextInt();
+            int input = Validated.integer(sc);
             switch (input) {
                 case 1:
                     Plant.printPlants();

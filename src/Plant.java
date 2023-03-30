@@ -119,7 +119,7 @@ public class Plant {
 
     public static void editPlant(){
         System.out.println("Pasirinkite augalo id kurį norite redaguoti: ");
-        int id = sc.nextInt();
+        int id = Validated.integer(sc);
         sc.nextLine();
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).id == id){
@@ -140,19 +140,19 @@ public class Plant {
         p.setContinent(sc.nextLine());
 
         System.out.println("4. Nurodykite augalo aukštį (cm)?: ");
-        p.setContinent(sc.nextLine());
+        p.setHeight(Validated.integer(sc));
 
         System.out.println("5. Ar augalas vienmetis?(true/false): ");
-        p.setAnnual(sc.nextBoolean());
+        p.setAnnual(Validated.bool(sc));
 
         System.out.println("6. Ar augalas valgomas?(true/false): ");
-        p.setIsEdible(sc.nextBoolean());
+        p.setIsEdible(Validated.bool(sc));
         sc.nextLine();
         return p;
     }
     public static void deletePlant(){
         System.out.println("Pasirinkite augalo id kurį norite ištrinti:");
-        int id = sc.nextInt();
+        int id = Validated.integer(sc);
         sc.nextLine();
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).id == id){
@@ -169,7 +169,7 @@ public class Plant {
         System.out.println("4.Pagal augalo aukštį");
         System.out.println("5.Vienmetis ar daugiametis (true/false");
         System.out.println("6.Valgomas ar nevalgomas (true/false");
-        int input = sc.nextInt();
+        int input = Validated.integer(sc);
         sc.nextLine();
         switch (input){
             case 1:
@@ -190,38 +190,55 @@ public class Plant {
             case 6:
                 filterByIsEdible();
                 break;
+            case 7:
+                return;
+            default:
+                System.out.println("Tokios opcijos nėra");
+                break;
         }
     }
     public static void filterBySpecies(){
         System.out.println("Įveskite rūšį arba rūšies fragmentą:");
-        String input = sc.nextLine().toLowerCase();
+        String input = sc.nextLine().toLowerCase().trim().replaceAll(" +"," ");
+        int count = 0;
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).species.toLowerCase().contains(input)){
                 System.out.println(plants.get(i));
+                count++;
             }
+        }
+        if(count == 0){
+            System.out.println("Augalo rūšis nerasta, įveskite kitą rūšį");
         }
     }
     public static void filterBySpeciesInLatin(){
         System.out.println("Įveskite rūšį arba rūšies fragmentą Lotyniškai:");
-        String input = sc.nextLine().toLowerCase();
+        String input = sc.nextLine().toLowerCase().trim().replaceAll(" +"," ");
+        int count = 0;
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).speciesInLatin.toLowerCase().contains(input)){
                 System.out.println(plants.get(i));
+                count++;
             }
+        }
+        if(count == 0){
+            System.out.println("Augalo rūšis Lotyniškai nerasta, įveskite kitą rūšį");
         }
     }
     public static void filterByContinet(){
         System.out.println("Įveskite žemyną:");
-        String input = sc.nextLine().toLowerCase();
+        String input = sc.nextLine().toLowerCase().trim().replaceAll(" +"," ");
+        int count = 0;
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).continent.toLowerCase().contains(input)){
                 System.out.println(plants.get(i));
+                count++;
             }
         }
     }
     public static void filterByHeight(){
         System.out.println("Įveskite augalo aukštį:");
-        int input = sc.nextInt();
+        int input = Validated.integer(sc);
         sc.nextLine();
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).height == input){
@@ -231,7 +248,7 @@ public class Plant {
     }
     public static void filterByIsAnnual(){
         System.out.println("Ar augalas daugiametis (true/false):");
-        boolean input = sc.nextBoolean();
+        boolean input = Validated.bool(sc);
         sc.nextLine();
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).isAnnual == input){
@@ -241,7 +258,7 @@ public class Plant {
     }
     public static void filterByIsEdible(){
         System.out.println("Ar augalas valgomas:");
-        boolean input = sc.nextBoolean();
+        boolean input = Validated.bool(sc);
         sc.nextLine();
         for (int i = 0; i < plants.size(); i++) {
             if(plants.get(i).isEdible == input){
