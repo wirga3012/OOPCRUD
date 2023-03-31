@@ -34,7 +34,7 @@ public class Validated {
             String input = sc.nextLine();
             if(
                     input.trim().length() != 0 &&
-                    input.replaceAll("[^a-zA-Z0-9ąčęėįšųūžĄČĘĖĮŠŲŪŽ]","").length() == input.length() &&
+                    input.replaceAll("[^a-zA-Z0-9ąčęėįšųūžĄČĘĖĮŠŲŪŽ ]","").length() == input.length() &&
                             input.replaceAll("[^0-9]", "").length() != input.length()
             ){
                 input = input.trim().replaceAll(" +"," ");

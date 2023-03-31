@@ -131,13 +131,13 @@ public class Plant {
     }
     public static Plant fillPlant (Plant p){
         System.out.println("1. Įveskite augalo pavadinimą: ");
-        p.setSpecies(sc.nextLine());
+        p.setSpecies(Validated.string(sc));
 
         System.out.println("2. Įveskite augalo pavadinimą Lotyniškai: ");
-        p.setSpeciesInLatin(sc.nextLine());
+        p.setSpeciesInLatin(Validated.string(sc));
 
         System.out.println("3. Kokiame žemyne auga?: ");
-        p.setContinent(sc.nextLine());
+        p.setContinent(Validated.string(sc));
 
         System.out.println("4. Nurodykite augalo aukštį (cm)?: ");
         p.setHeight(Validated.integer(sc));
@@ -222,7 +222,7 @@ public class Plant {
             }
         }
         if(count == 0){
-            System.out.println("Augalo rūšis Lotyniškai nerasta, įveskite kitą rūšį");
+            System.out.println("Augalo rūšis Lotyniškai nerasta, įveskite kitą rūšį.");
         }
     }
     public static void filterByContinet(){
@@ -234,6 +234,9 @@ public class Plant {
                 System.out.println(plants.get(i));
                 count++;
             }
+        }
+        if(count == 0){
+            System.out.println("Augalas šiame žemyne nerastas,įveskite kitą žemyną.");
         }
     }
     public static void filterByHeight(){
